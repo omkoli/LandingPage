@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 /**
- * TestLoop mark — an infinity/loop glyph in the brand gradient, evoking the
+ * Proofly mark — an infinity/loop glyph in the brand gradient, evoking the
  * continuous test → improve → launch cycle.
  */
 export default function Logo({ className }: { className?: string }) {

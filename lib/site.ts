@@ -1,14 +1,16 @@
 /**
- * Central content + configuration for the TestLoop landing page.
+ * Central content + configuration for the Proofly landing page.
  * Keeping copy here makes the marketing surface easy to iterate on.
  */
 
 export const site = {
-  name: "TestLoop",
+  name: "Proofly",
   tagline: "AI App Usability Testing Marketplace",
   description:
     "Connect your AI-generated MVP with product-minded testers. Receive structured reports uncovering bugs, UX issues, friction points, and actionable recommendations — before you launch.",
-  url: "https://testloop.app",
+  url: "https://proofly.io",
+  // App subdomain used inside the product mockups.
+  appDomain: "app.proofly.io",
 };
 
 export const navLinks = [
@@ -19,23 +21,35 @@ export const navLinks = [
   { label: "FAQ", href: "#faq" },
 ];
 
-export const stats = [
-  { value: 500, suffix: "+", label: "Early founders interested" },
-  { value: 200, suffix: "+", label: "Testers on the waitlist" },
-  { value: 30, suffix: "+", label: "AI apps launching weekly" },
+// Honest positioning for a pre-launch product — no fabricated traction metrics.
+export const trustBadges = [
+  {
+    title: "Founding pilot",
+    body: "We're onboarding the first cohort of founders and testers now.",
+  },
+  {
+    title: "Shape the product",
+    body: "Early members help define the workflows, reports and pricing.",
+  },
+  {
+    title: "Lock in pilot rates",
+    body: "Founding members keep early-access pricing after launch.",
+  },
 ];
 
-export const marqueeLogos = [
-  "Nebula AI",
-  "Synthflow",
-  "Vectorly",
-  "Promptly",
-  "Cognify",
-  "Loomia",
-  "Draftbot",
-  "Kernel",
-  "Astra Labs",
-  "Fathom",
+// The AI build tools our target founders ship with — describes who Proofly is
+// for, not customers we claim to have.
+export const builtWith = [
+  "Cursor",
+  "v0",
+  "Bolt",
+  "Lovable",
+  "Replit",
+  "Claude",
+  "Windsurf",
+  "Vercel",
+  "Supabase",
+  "Framer",
 ];
 
 export const painPoints = [
@@ -145,7 +159,7 @@ export const workflowSteps = [
   {
     step: "02",
     title: "Platform creates a brief",
-    body: "TestLoop generates a structured testing brief from your goals automatically.",
+    body: "Proofly generates a structured testing brief from your goals automatically.",
   },
   {
     step: "03",
@@ -170,7 +184,7 @@ export const workflowSteps = [
 ];
 
 export const comparison = {
-  columns: ["Generic freelancers", "Traditional QA", "TestLoop"],
+  columns: ["Generic freelancers", "Traditional QA", "Proofly"],
   rows: [
     { label: "Structured UX testing", values: [false, "partial", true] },
     { label: "Built for AI MVPs", values: [false, false, true] },
@@ -182,30 +196,28 @@ export const comparison = {
   ],
 };
 
-export const testimonials = [
+// Real, verifiable benefits of joining the pilot — used in place of testimonials
+// while the product is pre-launch.
+export const foundingBenefits = [
   {
-    quote:
-      "We caught three activation-killing UX issues a week before launch. TestLoop paid for itself in the first report.",
-    name: "Maya Okafor",
-    role: "Founder, Synthflow",
+    title: "Founding-member pricing",
+    body: "Join during the pilot and keep early-access rates once we open to everyone.",
+    icon: "Tag",
   },
   {
-    quote:
-      "Finally, feedback that reads like a product review instead of a bug list. The severity scoring is gold.",
-    name: "Daniel Reyes",
-    role: "Solo founder, Draftbot",
+    title: "Priority matching",
+    body: "Founding founders get first access to our most experienced testers.",
+    icon: "Zap",
   },
   {
-    quote:
-      "As a tester I love the guided flows — I know exactly what to evaluate and my insights actually get used.",
-    name: "Priya Nair",
-    role: "Senior tester, TestLoop",
+    title: "A direct line to the team",
+    body: "Work with us as we build. Your feedback shapes the workflows and reports.",
+    icon: "MessagesSquare",
   },
   {
-    quote:
-      "The launch-readiness score gave our team the confidence to ship. No more guessing if the MVP was ready.",
-    name: "Tom Braun",
-    role: "Co-founder, Kernel",
+    title: "Shape the standard",
+    body: "Help define what a great usability report for AI apps actually looks like.",
+    icon: "PenTool",
   },
 ];
 

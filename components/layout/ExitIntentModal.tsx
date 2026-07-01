@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, Sparkles, X } from "lucide-react";
+import { ArrowRight, Loader2, Sparkles, X } from "lucide-react";
+import { submitWaitlist } from "@/lib/waitlist";
+import { site } from "@/lib/site";
 
-const STORAGE_KEY = "testloop_exit_seen";
+const STORAGE_KEY = "proofly_exit_seen";
 
 /**
  * Exit-intent waitlist prompt. Fires once per session when the cursor leaves
@@ -14,6 +16,21 @@ export default function ExitIntentModal() {
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [done, setDone] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || loading) return;
+    setLoading(true);
+    const result = await submitWaitlist({
+      email,
+      role: "founder",
+      _subject: `New waitlist signup (exit-intent) · ${site.name}`,
+      source: "exit-intent",
+    });
+    setLoading(false);
+    if (result.ok) setDone(true);
+  };
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -106,10 +123,7 @@ export default function ExitIntentModal() {
                   early access.
                 </p>
                 <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    if (email) setDone(true);
-                  }}
+                  onSubmit={handleSubmit}
                   className="mt-6 flex flex-col gap-3"
                 >
                   <input
@@ -122,13 +136,23 @@ export default function ExitIntentModal() {
                   />
                   <button
                     type="submit"
-                    className="group flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-brand-indigo via-brand-purple to-brand-blue px-6 py-3.5 text-sm font-semibold text-white shadow-glow [background-size:200%_auto] transition-all hover:[background-position:right_center]"
+                    disabled={loading}
+                    className="group flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-brand-indigo via-brand-purple to-brand-blue px-6 py-3.5 text-sm font-semibold text-white shadow-glow [background-size:200%_auto] transition-all hover:[background-position:right_center] disabled:opacity-80"
                   >
-                    Claim my spot
-                    <ArrowRight
-                      size={15}
-                      className="transition-transform group-hover:translate-x-1"
-                    />
+                    {loading ? (
+                      <>
+                        <Loader2 size={15} className="animate-spin" />
+                        Claiming…
+                      </>
+                    ) : (
+                      <>
+                        Claim my spot
+                        <ArrowRight
+                          size={15}
+                          className="transition-transform group-hover:translate-x-1"
+                        />
+                      </>
+                    )}
                   </button>
                 </form>
               </>

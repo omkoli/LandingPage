@@ -2,10 +2,12 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, Check, Rocket, Sparkles } from "lucide-react";
+import { AlertCircle, ArrowRight, Check, Loader2, Rocket, Sparkles } from "lucide-react";
 import AuroraBackground from "@/components/background/AuroraBackground";
 import Confetti from "@/components/ui/Confetti";
 import { Reveal } from "@/components/ui/Reveal";
+import { submitWaitlist } from "@/lib/waitlist";
+import { site } from "@/lib/site";
 
 type Role = "founder" | "tester";
 
@@ -21,7 +23,7 @@ type Field = {
 const founderFields: Field[] = [
   { name: "name", label: "Name", placeholder: "Ada Lovelace" },
   { name: "email", label: "Work email", type: "email", placeholder: "you@startup.com" },
-  { name: "startup", label: "Startup", placeholder: "Synthflow" },
+  { name: "startup", label: "Startup", placeholder: "Acme AI" },
   { name: "prototype", label: "Prototype URL", placeholder: "https://…", type: "url" },
   { name: "summary", label: "App summary", placeholder: "What does your AI app do?", full: true, textarea: true },
   { name: "challenge", label: "Validation challenge", placeholder: "What are you most unsure about?", full: true, textarea: true },
@@ -38,12 +40,34 @@ const testerFields: Field[] = [
 export default function Waitlist() {
   const [role, setRole] = useState<Role>("founder");
   const [submitted, setSubmitted] = useState<Role | null>(null);
+  const [status, setStatus] = useState<"idle" | "loading">("idle");
+  const [error, setError] = useState<string | null>(null);
 
   const fields = role === "founder" ? founderFields : testerFields;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(role);
+    if (status === "loading") return;
+    setError(null);
+    setStatus("loading");
+
+    const data = Object.fromEntries(
+      new FormData(e.currentTarget).entries()
+    ) as Record<string, string>;
+
+    const result = await submitWaitlist({
+      ...data,
+      role,
+      _subject: `New ${role} waitlist signup · ${site.name}`,
+      source: `${role}-waitlist`,
+    });
+
+    setStatus("idle");
+    if (result.ok) {
+      setSubmitted(role);
+    } else {
+      setError(result.error ?? "Something went wrong. Please try again.");
+    }
   };
 
   return (
@@ -91,6 +115,7 @@ export default function Waitlist() {
                   onClick={() => {
                     setRole(r);
                     setSubmitted(null);
+                    setError(null);
                   }}
                   className={`relative z-10 rounded-full py-2.5 text-sm font-medium capitalize transition-colors ${
                     role === r ? "text-white" : "text-white/50"
@@ -178,26 +203,46 @@ export default function Waitlist() {
                   ))}
 
                   <div className="sm:col-span-2">
+                    {error && (
+                      <motion.p
+                        initial={{ opacity: 0, y: -4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="mb-3 flex items-center justify-center gap-2 rounded-2xl border border-brand-pink/30 bg-brand-pink/10 px-4 py-2.5 text-sm text-brand-pink"
+                      >
+                        <AlertCircle size={15} />
+                        {error}
+                      </motion.p>
+                    )}
                     <button
                       type="submit"
-                      className="group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-brand-indigo via-brand-purple to-brand-blue px-7 py-4 text-sm font-semibold text-white shadow-glow [background-size:200%_auto] transition-all duration-300 hover:[background-position:right_center] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cyan/60"
+                      disabled={status === "loading"}
+                      className="group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-brand-indigo via-brand-purple to-brand-blue px-7 py-4 text-sm font-semibold text-white shadow-glow [background-size:200%_auto] transition-all duration-300 hover:[background-position:right_center] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cyan/60 disabled:cursor-not-allowed disabled:opacity-80"
                     >
                       <span className="absolute inset-0 -z-10 bg-gradient-to-r from-brand-indigo to-brand-cyan opacity-60 blur-lg transition-opacity group-hover:opacity-90" />
-                      {role === "founder" ? (
+                      {status === "loading" ? (
+                        <>
+                          <Loader2 size={16} className="animate-spin" />
+                          Joining…
+                        </>
+                      ) : role === "founder" ? (
                         <>
                           <Rocket size={16} />
                           Join Founder Waitlist
+                          <ArrowRight
+                            size={16}
+                            className="transition-transform group-hover:translate-x-1"
+                          />
                         </>
                       ) : (
                         <>
                           <Sparkles size={16} />
                           Become a Tester
+                          <ArrowRight
+                            size={16}
+                            className="transition-transform group-hover:translate-x-1"
+                          />
                         </>
                       )}
-                      <ArrowRight
-                        size={16}
-                        className="transition-transform group-hover:translate-x-1"
-                      />
                     </button>
                     <p className="mt-3 text-center text-xs text-white/35">
                       No spam. We&apos;ll only email you about early access.

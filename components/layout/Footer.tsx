@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowRight, Github, Linkedin, Twitter } from "lucide-react";
+import { ArrowRight, Github, Linkedin, Loader2, Twitter } from "lucide-react";
 import { footerLinks, site } from "@/lib/site";
+import { submitWaitlist } from "@/lib/waitlist";
 import Logo from "@/components/ui/Logo";
 
 const socials = [
@@ -14,6 +15,24 @@ const socials = [
 export default function Footer() {
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || loading) return;
+    setLoading(true);
+    const result = await submitWaitlist({
+      email,
+      role: "newsletter",
+      _subject: `New newsletter signup · ${site.name}`,
+      source: "footer-newsletter",
+    });
+    setLoading(false);
+    if (result.ok) {
+      setSent(true);
+      setEmail("");
+    }
+  };
 
   return (
     <footer className="relative overflow-hidden border-t border-white/10 bg-ink-950">
@@ -34,13 +53,7 @@ export default function Footer() {
               Validate before your users do.
             </p>
 
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                if (email) setSent(true);
-              }}
-              className="mt-6"
-            >
+            <form onSubmit={handleSubscribe} className="mt-6">
               <label className="mb-2 block text-xs font-medium uppercase tracking-widest text-white/40">
                 Product updates
               </label>
@@ -57,9 +70,14 @@ export default function Footer() {
                 <button
                   type="submit"
                   aria-label="Subscribe"
-                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-brand-indigo to-brand-purple text-white transition-transform hover:scale-105"
+                  disabled={loading || sent}
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-brand-indigo to-brand-purple text-white transition-transform hover:scale-105 disabled:opacity-70"
                 >
-                  <ArrowRight size={16} />
+                  {loading ? (
+                    <Loader2 size={16} className="animate-spin" />
+                  ) : (
+                    <ArrowRight size={16} />
+                  )}
                 </button>
               </div>
             </form>

@@ -10,7 +10,7 @@ import Features from "@/components/sections/Features";
 import Workflow from "@/components/sections/Workflow";
 import Comparison from "@/components/sections/Comparison";
 import DashboardPreview from "@/components/sections/DashboardPreview";
-import Testimonials from "@/components/sections/Testimonials";
+import FoundingMembers from "@/components/sections/FoundingMembers";
 import FAQ from "@/components/sections/FAQ";
 import Waitlist from "@/components/sections/Waitlist";
 import FinalCTA from "@/components/sections/FinalCTA";
@@ -49,7 +49,7 @@ export default function Home() {
         <Workflow />
         <Comparison />
         <DashboardPreview />
-        <Testimonials />
+        <FoundingMembers />
         <FAQ />
         <Waitlist />
         <FinalCTA />

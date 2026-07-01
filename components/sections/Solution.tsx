@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
+import { site } from "@/lib/site";
 
 const tabs = [
   { id: "founder", label: "Founder dashboard", icon: LayoutDashboard },
@@ -72,7 +73,7 @@ export default function Solution() {
               <span className="h-3 w-3 rounded-full bg-white/[0.07]" />
               <div className="mx-auto flex items-center gap-2 rounded-full border border-white/5 bg-white/[0.03] px-4 py-1 text-xs text-white/40">
                 <span className="h-1.5 w-1.5 rounded-full bg-brand-emerald" />
-                app.testloop.io/{active}
+                {site.appDomain}/{active}
               </div>
             </div>
 
@@ -192,7 +193,7 @@ function TesterScreen() {
       <Panel>
         <span className="text-sm font-medium text-white">Available projects</span>
         <div className="mt-4 space-y-3">
-          {["Nebula AI · Chat", "Draftbot · Editor", "Kernel · Dashboard"].map(
+          {["AI Chat · Onboarding", "Editor · First run", "Dashboard · Setup"].map(
             (n, i) => (
               <div
                 key={n}

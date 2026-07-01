@@ -16,6 +16,7 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import CountUp from "@/components/ui/CountUp";
 import { Reveal } from "@/components/ui/Reveal";
 import Logo from "@/components/ui/Logo";
+import { site } from "@/lib/site";
 
 const metrics = [
   { label: "Active tests", value: 24, suffix: "", tone: "from-brand-indigo to-brand-blue" },
@@ -25,10 +26,10 @@ const metrics = [
 ];
 
 const activity = [
-  { icon: CheckCircle2, text: "Report delivered for Nebula AI", time: "2m", tone: "text-brand-emerald" },
-  { icon: Bug, text: "Critical issue flagged in Draftbot", time: "14m", tone: "text-brand-pink" },
-  { icon: Users, text: "3 testers matched to Kernel", time: "38m", tone: "text-brand-cyan" },
-  { icon: Activity, text: "Onboarding test 82% complete", time: "1h", tone: "text-brand-blue" },
+  { icon: CheckCircle2, text: "Report delivered for your onboarding flow", time: "2m", tone: "text-brand-emerald" },
+  { icon: Bug, text: "Critical issue flagged in AI chat", time: "14m", tone: "text-brand-pink" },
+  { icon: Users, text: "3 testers matched to your project", time: "38m", tone: "text-brand-cyan" },
+  { icon: Activity, text: "Pricing page test 82% complete", time: "1h", tone: "text-brand-blue" },
 ];
 
 export default function DashboardPreview() {
@@ -51,7 +52,7 @@ export default function DashboardPreview() {
                 <div className="flex items-center gap-2.5">
                   <Logo className="h-8 w-8" />
                   <span className="text-sm font-semibold text-white">
-                    TestLoop
+                    {site.name}
                   </span>
                 </div>
                 <nav className="mt-8 space-y-1">

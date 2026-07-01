@@ -1,8 +1,8 @@
 {
-  "name": "testloop-landing",
+  "name": "proofly-landing",
   "version": "1.0.0",
   "private": true,
-  "description": "TestLoop — AI App Usability Testing Marketplace landing page",
+  "description": "Proofly — AI App Usability Testing Marketplace landing page",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
