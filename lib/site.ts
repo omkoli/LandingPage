@@ -1,16 +1,16 @@
 /**
- * Central content + configuration for the Proofly landing page.
+ * Central content + configuration for the BetaCheck landing page.
  * Keeping copy here makes the marketing surface easy to iterate on.
  */
 
 export const site = {
-  name: "Proofly",
+  name: "BetaCheck",
   tagline: "AI App Usability Testing Marketplace",
   description:
     "Connect your AI-generated MVP with product-minded testers. Receive structured reports uncovering bugs, UX issues, friction points, and actionable recommendations — before you launch.",
-  url: "https://proofly.io",
+  url: "https://betacheck.app",
   // App subdomain used inside the product mockups.
-  appDomain: "app.proofly.io",
+  appDomain: "app.betacheck.app",
 };
 
 export const navLinks = [
@@ -37,7 +37,7 @@ export const trustBadges = [
   },
 ];
 
-// The AI build tools our target founders ship with — describes who Proofly is
+// The AI build tools our target founders ship with — describes who BetaCheck is
 // for, not customers we claim to have.
 export const builtWith = [
   "Cursor",
@@ -159,7 +159,7 @@ export const workflowSteps = [
   {
     step: "02",
     title: "Platform creates a brief",
-    body: "Proofly generates a structured testing brief from your goals automatically.",
+    body: "BetaCheck generates a structured testing brief from your goals automatically.",
   },
   {
     step: "03",
@@ -184,7 +184,7 @@ export const workflowSteps = [
 ];
 
 export const comparison = {
-  columns: ["Generic freelancers", "Traditional QA", "Proofly"],
+  columns: ["Generic freelancers", "Traditional QA", "BetaCheck"],
   rows: [
     { label: "Structured UX testing", values: [false, "partial", true] },
     { label: "Built for AI MVPs", values: [false, false, true] },

@@ -1,8 +1,8 @@
 {
-  "name": "proofly-landing",
+  "name": "betacheck-landing",
   "version": "1.0.0",
   "private": true,
-  "description": "Proofly — AI App Usability Testing Marketplace landing page",
+  "description": "BetaCheck — AI App Usability Testing Marketplace landing page",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

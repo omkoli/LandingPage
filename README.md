@@ -1,11 +1,11 @@
-# Proofly — AI App Usability Testing Marketplace
+# BetaCheck — AI App Usability Testing Marketplace
 
-A premium, animation-driven landing page for **Proofly**, a marketplace that
+A premium, animation-driven landing page for **BetaCheck**, a marketplace that
 connects founders building AI-generated apps with product-minded testers who run
 structured usability evaluations. The page is conversion-focused: every section
 drives toward the **Founder** or **Tester** waitlist.
 
-> Proofly is pre-launch, so the page makes **no fabricated traction claims** —
+> BetaCheck is pre-launch, so the page makes **no fabricated traction claims** —
 > no invented user counts, logos, or testimonials. Social proof is honest
 > founding-member positioning.
 

@@ -30,7 +30,7 @@ export default function FoundingMembers() {
           eyebrow="Founding members"
           title="Get in early and"
           highlight="build it with us."
-          description="Proofly is pre-launch. Join the pilot to lock in early-access pricing and help shape how usability testing works for AI apps."
+          description="BetaCheck is pre-launch. Join the pilot to lock in early-access pricing and help shape how usability testing works for AI apps."
         />
 
         <RevealGroup className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

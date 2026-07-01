@@ -6,7 +6,7 @@ import { ArrowRight, Loader2, Sparkles, X } from "lucide-react";
 import { submitWaitlist } from "@/lib/waitlist";
 import { site } from "@/lib/site";
 
-const STORAGE_KEY = "proofly_exit_seen";
+const STORAGE_KEY = "betacheck_exit_seen";
 
 /**
  * Exit-intent waitlist prompt. Fires once per session when the cursor leaves
