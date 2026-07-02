@@ -10,40 +10,54 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // Cool graphite / obsidian base — technical, near-black with a blue undertone.
         ink: {
-          950: "#050505",
-          900: "#0a0a0c",
-          800: "#0f1014",
-          700: "#16171d",
-          600: "#1d1f27",
+          950: "#05060a",
+          900: "#090b11",
+          800: "#0e1119",
+          700: "#151a25",
+          600: "#1d2331",
         },
+        // "Signal" aurora accents laid across a green → teal → azure spectrum, so any
+        // combination reads as one cohesive electric gradient. Pink is repurposed as
+        // the coral error/critical tone (warm contrast against the cool palette).
         brand: {
-          blue: "#4c8dff",
-          indigo: "#6366f1",
-          purple: "#a855f7",
-          cyan: "#22d3ee",
-          teal: "#2dd4bf",
-          emerald: "#34d399",
-          pink: "#f472b6",
+          blue: "#3d9bff", // electric azure
+          indigo: "#26e0a8", // spring green (primary)
+          purple: "#10cbd6", // teal-cyan (replaces violet)
+          cyan: "#2fb6f7", // sky / azure-cyan
+          teal: "#12d9c0", // teal
+          emerald: "#2feba0", // mint — success / "pass"
+          pink: "#ff5d7a", // coral — error / critical
         },
       },
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
-        display: ["var(--font-inter)", "system-ui", "sans-serif"],
+        display: [
+          "var(--font-display)",
+          "var(--font-inter)",
+          "system-ui",
+          "sans-serif",
+        ],
+        mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
       },
       fontSize: {
-        "8xl": ["6rem", { lineHeight: "1", letterSpacing: "-0.03em" }],
-        "9xl": ["8rem", { lineHeight: "0.95", letterSpacing: "-0.035em" }],
+        "8xl": ["6rem", { lineHeight: "1", letterSpacing: "-0.035em" }],
+        "9xl": ["8rem", { lineHeight: "0.95", letterSpacing: "-0.04em" }],
       },
+      // Slightly tighter radii for a crisper, more technical surface language.
       borderRadius: {
-        "4xl": "2rem",
-        "5xl": "2.5rem",
+        "2xl": "0.75rem",
+        "3xl": "1.125rem",
+        "4xl": "1.375rem",
+        "5xl": "1.75rem",
       },
       boxShadow: {
-        glow: "0 0 40px -10px rgba(99, 102, 241, 0.45)",
-        "glow-lg": "0 0 80px -20px rgba(99, 102, 241, 0.55)",
-        "glow-cyan": "0 0 40px -10px rgba(34, 211, 238, 0.45)",
-        card: "0 1px 0 0 rgba(255,255,255,0.05) inset, 0 20px 60px -20px rgba(0,0,0,0.7)",
+        glow: "0 0 34px -8px rgba(38, 224, 168, 0.42)",
+        "glow-lg": "0 0 72px -16px rgba(38, 224, 168, 0.5)",
+        "glow-cyan": "0 0 34px -8px rgba(61, 155, 255, 0.42)",
+        card: "inset 0 1px 0 0 rgba(255,255,255,0.07), 0 24px 60px -28px rgba(0,0,0,0.85)",
+        "ring-glow": "0 0 0 1px rgba(38,224,168,0.22), 0 0 30px -8px rgba(38,224,168,0.4)",
       },
       backgroundImage: {
         "radial-fade":

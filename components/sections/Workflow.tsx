@@ -67,7 +67,7 @@ function TimelineRow({
     >
       {/* node */}
       <div className="absolute left-6 z-10 flex h-3 w-3 -translate-x-1/2 items-center justify-center md:left-1/2">
-        <span className="h-3 w-3 rounded-full bg-white shadow-[0_0_16px_4px_rgba(99,102,241,0.6)]" />
+        <span className="h-3 w-3 rounded-full bg-white shadow-[0_0_16px_4px_rgba(38,224,168,0.6)]" />
         <span className="absolute h-3 w-3 animate-pulse-ring rounded-full bg-brand-indigo" />
       </div>
 

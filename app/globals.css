@@ -3,18 +3,28 @@
 @tailwind utilities;
 
 :root {
-  --background: #050505;
-  --foreground: #ededf2;
+  --background: #05060a;
+  --foreground: #eef1f6;
 }
 
 * {
-  border-color: rgba(255, 255, 255, 0.06);
+  /* Crisper, cool-tinted hairline borders for a technical surface language. */
+  border-color: rgba(148, 168, 200, 0.1);
 }
 
 html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+/* Confident, geometric display type for every heading; stronger tracking. */
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  letter-spacing: -0.025em;
+  font-weight: 600;
 }
 
 /* Lenis smooth scroll */
@@ -41,7 +51,7 @@ body {
 
 /* Custom selection */
 ::selection {
-  background: rgba(99, 102, 241, 0.35);
+  background: rgba(38, 224, 168, 0.3);
   color: #fff;
 }
 
@@ -50,12 +60,12 @@ body {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #050505;
+  background: #05060a;
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #6366f1, #a855f7);
+  background: linear-gradient(180deg, #26e0a8, #2fb6f7);
   border-radius: 999px;
-  border: 2px solid #050505;
+  border: 2px solid #05060a;
 }
 
 @layer components {
@@ -71,15 +81,25 @@ body {
     @apply bg-gradient-to-r from-brand-blue via-brand-purple to-brand-cyan bg-clip-text text-transparent;
   }
 
-  /* Glass surfaces */
+  /* Glass surfaces — cleaner, cooler, with a faint top-lit sheen. */
   .glass {
-    @apply border border-white/10 bg-white/[0.03] backdrop-blur-xl;
+    @apply border border-white/[0.08] bg-white/[0.02] backdrop-blur-xl;
+    background-image: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.035),
+      rgba(255, 255, 255, 0) 40%
+    );
   }
   .glass-strong {
-    @apply border border-white/10 bg-white/[0.06] backdrop-blur-2xl;
+    @apply border border-white/10 bg-white/[0.05] backdrop-blur-2xl;
+    background-image: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.06),
+      rgba(255, 255, 255, 0) 45%
+    );
   }
 
-  /* Gradient border wrapper */
+  /* Gradient border wrapper — electric signal spectrum. */
   .gradient-border {
     position: relative;
     background-clip: padding-box;
@@ -92,9 +112,9 @@ body {
     padding: 1px;
     background: linear-gradient(
       135deg,
-      rgba(99, 102, 241, 0.6),
-      rgba(34, 211, 238, 0.35),
-      rgba(168, 85, 247, 0.5)
+      rgba(38, 224, 168, 0.65),
+      rgba(18, 217, 192, 0.35),
+      rgba(61, 155, 255, 0.6)
     );
     -webkit-mask: linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
@@ -103,8 +123,10 @@ body {
     pointer-events: none;
   }
 
+  /* Technical, monospaced label chips. */
   .eyebrow {
-    @apply inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-white/60 backdrop-blur-md;
+    @apply inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.02] px-4 py-1.5 text-[11px] font-medium uppercase tracking-[0.28em] text-white/55 backdrop-blur-md;
+    font-family: var(--font-mono);
   }
 }
 
@@ -137,14 +159,17 @@ body {
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
+  /* Layered blueprint grid: coarse structural lines + a fine technical mesh. */
   .bg-grid {
     background-image: linear-gradient(
         to right,
-        rgba(255, 255, 255, 0.04) 1px,
+        rgba(125, 155, 195, 0.055) 1px,
         transparent 1px
       ),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-    background-size: 56px 56px;
+      linear-gradient(to bottom, rgba(125, 155, 195, 0.055) 1px, transparent 1px),
+      linear-gradient(to right, rgba(125, 155, 195, 0.025) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(125, 155, 195, 0.025) 1px, transparent 1px);
+    background-size: 120px 120px, 120px 120px, 30px 30px, 30px 30px;
   }
 
   .mask-fade-y {

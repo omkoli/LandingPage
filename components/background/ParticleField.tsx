@@ -40,7 +40,7 @@ export default function ParticleField({
     let running = true;
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-    const hues = [230, 258, 190, 168]; // indigo, purple, cyan, teal
+    const hues = [158, 168, 190, 210]; // emerald, teal, cyan, azure
 
     const resize = () => {
       const rect = canvas.parentElement?.getBoundingClientRect();

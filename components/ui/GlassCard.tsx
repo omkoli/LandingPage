@@ -65,7 +65,7 @@ export default function GlassCard({
         <div
           className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
           style={{
-            background: `radial-gradient(360px circle at ${glow.x}% ${glow.y}%, rgba(99,102,241,0.14), transparent 70%)`,
+            background: `radial-gradient(360px circle at ${glow.x}% ${glow.y}%, rgba(38,224,168,0.14), transparent 70%)`,
           }}
         />
       )}

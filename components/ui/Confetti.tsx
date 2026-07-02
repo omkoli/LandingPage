@@ -14,7 +14,7 @@ type Piece = {
   shape: "rect" | "circle";
 };
 
-const COLORS = ["#6366f1", "#a855f7", "#22d3ee", "#2dd4bf", "#34d399", "#f472b6"];
+const COLORS = ["#26e0a8", "#12d9c0", "#2fb6f7", "#3d9bff", "#2feba0", "#ff5d7a"];
 
 /**
  * One-shot canvas confetti burst from the center. Mount it when `fire` flips true.

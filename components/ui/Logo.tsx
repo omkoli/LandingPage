@@ -21,9 +21,9 @@ export default function Logo({ className }: { className?: string }) {
         >
           <defs>
             <linearGradient id="logo-grad" x1="0" y1="0" x2="24" y2="24">
-              <stop stopColor="#6366f1" />
-              <stop offset="0.5" stopColor="#a855f7" />
-              <stop offset="1" stopColor="#22d3ee" />
+              <stop stopColor="#26e0a8" />
+              <stop offset="0.5" stopColor="#12d9c0" />
+              <stop offset="1" stopColor="#3d9bff" />
             </linearGradient>
           </defs>
           <path

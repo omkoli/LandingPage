@@ -235,8 +235,8 @@ function TesterScreen() {
               />
               <defs>
                 <linearGradient id="tester-grad" x1="0" y1="0" x2="36" y2="36">
-                  <stop stopColor="#6366f1" />
-                  <stop offset="1" stopColor="#22d3ee" />
+                  <stop stopColor="#26e0a8" />
+                  <stop offset="1" stopColor="#3d9bff" />
                 </linearGradient>
               </defs>
             </svg>

@@ -68,7 +68,7 @@ export default function Problem() {
                     >
                       <motion.path
                         d="M2 6 C 20 8, 30 10, 45 16 S 75 26, 98 27"
-                        stroke="#f472b6"
+                        stroke="#ff5d7a"
                         strokeWidth="2"
                         strokeLinecap="round"
                         initial={{ pathLength: 0 }}

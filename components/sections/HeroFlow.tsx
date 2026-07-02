@@ -59,7 +59,7 @@ export default function HeroFlow() {
           <div className="absolute left-[26px] top-4 bottom-4 w-px bg-gradient-to-b from-brand-indigo/60 via-brand-purple/40 to-brand-cyan/60">
             {!reduce && (
               <motion.span
-                className="absolute -left-[3px] h-2 w-2 rounded-full bg-white shadow-[0_0_12px_4px_rgba(99,102,241,0.7)]"
+                className="absolute -left-[3px] h-2 w-2 rounded-full bg-white shadow-[0_0_12px_4px_rgba(38,224,168,0.7)]"
                 animate={{ top: ["0%", "100%"] }}
                 transition={{
                   duration: 3.4,
