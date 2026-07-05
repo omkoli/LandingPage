@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Forge Report · BetaCheck</title>
+<style>
+  :root{
+    --ink:#1a1613;
+    --ink-soft:#3d342e;
+    --paper:#f4ecdd;
+    --paper-shadow:#e6d9bd;
+    --wax:#8b1a1a;
+    --wax-dark:#5c0f0f;
+    --wax-hi:#c14545;
+    --gold:#a07a2e;
+    --rule:#c9b48a;
+    --grave:#4a4038;
+    --serif:'Iowan Old Style','Palatino Linotype','Palatino','Georgia',serif;
+    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,system-ui,sans-serif;
+    --mono:'SF Mono',ui-monospace,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:
+      radial-gradient(1200px 800px at 15% -10%,#f8f1e0 0%,transparent 60%),
+      radial-gradient(1000px 700px at 110% 110%,#ece0c6 0%,transparent 55%),
+      var(--paper);
+    color:var(--ink);
+    font-family:var(--serif);
+    line-height:1.55;
+    min-height:100vh;
+    padding:56px 20px 80px;
+  }
+  .sheet{
+    max-width:820px;
+    margin:0 auto;
+    background:linear-gradient(180deg,#faf4e6 0%,#f2e8cf 100%);
+    border:1px solid var(--rule);
+    box-shadow:
+      0 1px 0 #fff8e5 inset,
+      0 22px 60px -25px rgba(60,40,20,.4),
+      0 6px 20px -8px rgba(60,40,20,.25);
+    padding:56px 64px 64px;
+    position:relative;
+    overflow:hidden;
+  }
+  .sheet::before{
+    /* subtle paper texture using dot noise */
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:
+      radial-gradient(rgba(90,60,30,.06) 1px,transparent 1px),
+      radial-gradient(rgba(120,80,40,.04) 1px,transparent 1px);
+    background-size:5px 5px,17px 17px;
+    background-position:0 0,3px 8px;
+    mix-blend-mode:multiply;
+    opacity:.7;
+  }
+  header{display:flex;align-items:flex-start;justify-content:space-between;gap:40px;margin-bottom:8px;position:relative}
+  .titleblock{max-width:520px}
+  .kicker{
+    font-family:var(--sans);
+    text-transform:uppercase;
+    letter-spacing:.28em;
+    font-size:11px;
+    color:var(--gold);
+    font-weight:700;
+    margin-bottom:14px;
+  }
+  h1{
+    font-family:var(--serif);
+    font-size:44px;
+    line-height:1.05;
+    margin:0 0 10px;
+    letter-spacing:-.01em;
+    color:var(--ink);
+  }
+  .subtitle{
+    font-style:italic;
+    color:var(--ink-soft);
+    font-size:17px;
+    margin:0;
+  }
+  .metaline{
+    font-family:var(--sans);
+    color:var(--ink-soft);
+    font-size:12px;
+    margin-top:22px;
+    letter-spacing:.05em;
+  }
+  .metaline b{color:var(--ink);font-weight:600}
+  .seal{flex:0 0 160px;margin-top:-6px;filter:drop-shadow(0 8px 12px rgba(60,20,20,.35))}
+  hr.rule{
+    border:0;height:1px;
+    background:linear-gradient(90deg,transparent,var(--rule) 20%,var(--rule) 80%,transparent);
+    margin:36px 0 28px;
+  }
+  h2{
+    font-family:var(--serif);
+    font-size:22px;
+    margin:32px 0 14px;
+    letter-spacing:.01em;
+  }
+  h2 .flourish{color:var(--gold);font-weight:400;margin-right:8px}
+  p{margin:0 0 12px}
+  .verdict{
+    text-align:center;
+    padding:22px 20px 24px;
+    border:1px double var(--rule);
+    background:rgba(255,246,220,.5);
+    margin:26px 0 14px;
+  }
+  .verdict .stamp{
+    font-family:var(--sans);
+    font-weight:800;
+    letter-spacing:.4em;
+    color:var(--wax);
+    font-size:28px;
+  }
+  .verdict .note{font-style:italic;color:var(--ink-soft);margin-top:6px;font-size:15px}
+  .residue{display:grid;gap:20px}
+  .card{
+    padding:18px 20px 16px;
+    border:1px solid var(--rule);
+    background:rgba(255,250,235,.55);
+    position:relative;
+  }
+  .card h3{
+    margin:0 0 10px;
+    font-family:var(--sans);
+    text-transform:uppercase;
+    letter-spacing:.22em;
+    font-size:11px;
+    color:var(--ink-soft);
+    font-weight:700;
+  }
+  .locks li{margin-bottom:8px}
+  .locks li b{color:var(--ink)}
+  .kills li{position:relative;padding-left:22px;margin-bottom:8px;color:var(--grave)}
+  .kills li::before{
+    content:"†";
+    position:absolute;left:0;top:0;
+    color:var(--wax-dark);
+    font-family:var(--serif);
+    font-size:18px;
+  }
+  ul{margin:0;padding-left:20px}
+  ul.clean{list-style:none;padding-left:0}
+  .parked li{margin-bottom:6px}
+  .footcredit{margin-top:24px;padding-top:20px;border-top:1px dashed var(--rule)}
+  .personas{display:grid;grid-template-columns:1fr 1fr;gap:12px 24px;margin-top:10px;font-size:14px}
+  .persona{display:flex;gap:10px;align-items:baseline}
+  .persona .icon{font-size:16px;line-height:1}
+  .persona .who{color:var(--ink)}
+  .persona .role{color:var(--ink-soft);font-style:italic;font-size:12px;margin-left:6px}
+  .fresh{color:var(--wax-dark)}
+  .signoff{
+    margin-top:36px;text-align:center;color:var(--ink-soft);
+    font-family:var(--sans);letter-spacing:.2em;text-transform:uppercase;font-size:10.5px;
+  }
+  .paths{
+    font-family:var(--mono);
+    font-size:12px;
+    background:rgba(50,30,15,.06);
+    padding:12px 14px;
+    border:1px dashed var(--rule);
+    color:var(--ink);
+    margin-top:16px;
+    word-break:break-all;
+  }
+  .quote{
+    font-style:italic;color:var(--ink-soft);
+    border-left:3px solid var(--wax);
+    padding:2px 0 2px 14px;
+    margin:8px 0 14px;
+    font-size:14.5px;
+  }
+  .cracks-held{
+    background:linear-gradient(180deg,rgba(139,26,26,.06),rgba(139,26,26,.02));
+    border:1px solid rgba(139,26,26,.25);
+  }
+  @media (max-width:720px){
+    .sheet{padding:36px 26px 44px}
+    header{flex-direction:column-reverse;align-items:center;text-align:center}
+    .titleblock{text-align:center}
+    .personas{grid-template-columns:1fr}
+    h1{font-size:34px}
+  }
+</style>
+</head>
+<body>
+<article class="sheet">
+  <header>
+    <div class="titleblock">
+      <div class="kicker">Forge Report · Session Verdict</div>
+      <h1>BetaCheck</h1>
+      <p class="subtitle">A bug-bounty-shaped marketplace for pre-launch MVPs, tested to destruction.</p>
+      <div class="metaline">
+        <b>Idea:</b> AI-app usability testing marketplace &nbsp;·&nbsp;
+        <b>Goal:</b> harden, critique, validate &nbsp;·&nbsp;
+        <b>Session:</b> 2026-07-03
+      </div>
+    </div>
+    <!-- Wax seal -->
+    <svg class="seal" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-label="HARDENED seal">
+      <defs>
+        <radialGradient id="wax" cx="35%" cy="30%" r="80%">
+          <stop offset="0%" stop-color="#c14545"/>
+          <stop offset="45%" stop-color="#8b1a1a"/>
+          <stop offset="100%" stop-color="#4a0808"/>
+        </radialGradient>
+        <radialGradient id="waxhi" cx="35%" cy="30%" r="45%">
+          <stop offset="0%" stop-color="rgba(255,220,200,.55)"/>
+          <stop offset="100%" stop-color="rgba(255,220,200,0)"/>
+        </radialGradient>
+        <path id="topcurve" d="M 30 100 A 70 70 0 0 1 170 100" fill="none"/>
+        <path id="botcurve" d="M 32 108 A 68 68 0 0 0 168 108" fill="none"/>
+      </defs>
+      <!-- irregular seal outer edge -->
+      <path d="M100 15
+               C 122 15 128 25 145 30
+               C 165 35 176 52 178 70
+               C 182 92 178 108 182 128
+               C 178 148 165 165 148 174
+               C 128 182 112 178 96 184
+               C 76 180 58 175 44 162
+               C 30 148 22 128 20 108
+               C 18 88 22 68 32 52
+               C 44 34 62 26 78 20
+               Z"
+        fill="url(#wax)" stroke="#3a0606" stroke-width="1.2"/>
+      <!-- highlight -->
+      <ellipse cx="78" cy="70" rx="42" ry="30" fill="url(#waxhi)"/>
+      <!-- inner ring -->
+      <circle cx="100" cy="100" r="68" fill="none" stroke="rgba(255,220,200,.35)" stroke-width="1"/>
+      <circle cx="100" cy="100" r="55" fill="none" stroke="rgba(255,220,200,.6)" stroke-width="1"/>
+      <!-- top arc text -->
+      <text font-family="Georgia,serif" font-size="10" font-weight="700"
+            fill="#ffe6d0" letter-spacing="4">
+        <textPath href="#topcurve" startOffset="50%" text-anchor="middle">THE BMAD FORGE</textPath>
+      </text>
+      <!-- bottom arc text -->
+      <text font-family="Georgia,serif" font-size="9" font-weight="600"
+            fill="#ffe6d0" letter-spacing="3">
+        <textPath href="#botcurve" startOffset="50%" text-anchor="middle">MMXXVI · 07 · 03</textPath>
+      </text>
+      <!-- central stamp -->
+      <text x="100" y="98" text-anchor="middle"
+            font-family="'Helvetica Neue',Arial,sans-serif" font-size="22" font-weight="900"
+            letter-spacing="4" fill="#fff2dc">HARD</text>
+      <text x="100" y="122" text-anchor="middle"
+            font-family="'Helvetica Neue',Arial,sans-serif" font-size="22" font-weight="900"
+            letter-spacing="4" fill="#fff2dc">ENED</text>
+      <!-- anvil sparks -->
+      <g stroke="#ffd28a" stroke-width="1.2" fill="none" opacity=".7">
+        <path d="M100 132 l -3 8"/>
+        <path d="M100 132 l 3 8"/>
+        <path d="M100 132 l 0 9"/>
+      </g>
+    </svg>
+  </header>
+
+  <hr class="rule" />
+
+  <div class="verdict">
+    <div class="stamp">HARDENED</div>
+    <div class="note">Survived four rounds of attack. Mechanism concrete. Cracks that held are implementation-tractable, not existential.</div>
+  </div>
+
+  <section class="residue">
+
+    <div class="card">
+      <h3>What was locked</h3>
+      <ul class="locks">
+        <li><b>Customer</b> — solo founders with a shipped-but-unlaunched MVP, largely vibe-coded via Lovable, v0, Bolt, or Cursor. Budget-sensitive.</li>
+        <li><b>Wedge</b> — INR-paid India tester supply against USD-billed founder revenue; time-zone offset delivers overnight turnaround as a feature.</li>
+        <li><b>Scope</b> — functional bugs, spec-conformance failures, task-blockers, data-integrity, first-run failures. Explicitly not security.</li>
+        <li><b>Payment mechanism</b> — hybrid: ~$8 base per completed report + severity-weighted bonuses ($3 minor / $10 major / $25 critical), $60 bonus cap per report, founders buy in packs.</li>
+        <li><b>Adjudication</b> — every finding in Categories B/C/E must cite a specific line of the founder's guidelines document. Triage becomes matching, not judgment.</li>
+        <li><b>Programs</b> — public + private toggle, private deferred to v1.1 behind a tester ranking system.</li>
+        <li><b>Cold start</b> — hybrid Plan A (manual concierge on tester supply, ~$960 subsidy + heavy founder time) + Plan C (AI-tool platform distribution partnership on founder demand). Friends as demo cohort only.</li>
+        <li><b>AI role</b> — filter for spam and duplicates, first-pass extraction. Never adjudicator.</li>
+      </ul>
+      <div class="paths">
+        Artifacts:<br />
+        _bmad-output/forge/betacheck-ai-testing-marketplace/taxonomy-v0.md<br />
+        _bmad-output/forge/betacheck-ai-testing-marketplace/guidelines-wizard-v0.md<br />
+        _bmad-output/forge/betacheck-ai-testing-marketplace/forged-idea.md
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>What was killed &mdash; and why</h3>
+      <ul class="kills clean">
+        <li><b>"AI-generated app" as a market segment</b> — justified only by trend timing. Trend is not a moat; testing needs don't fundamentally differ from any MVP.</li>
+        <li><b>Pure per-bug bounty at MVP-founder budgets</b> — economics don't math; tester cold-start impossible without base pay.</li>
+        <li><b>Pure per-report Maze-clone model</b> — collapses differentiation. Maze wins a commodity race on scale.</li>
+        <li><b>Synack-shaped enterprise pivot</b> — customer mismatch. $50K/engagement contracts vs. $500 MVP-founder budgets.</li>
+        <li><b>"AI + HITL validation" as adjudicator</b> — hand-wave without a defined AI job. Retained only as a filter.</li>
+        <li><b>Freeform "business logic flaws" scope</b> — straddled Hackerone territory. Narrowed to spec-conformance failures only.</li>
+      </ul>
+    </div>
+
+    <div class="card cracks-held">
+      <h3>Cracks that held &mdash; parked, not resolved</h3>
+      <ul class="parked">
+        <li>Pre-launch trust &amp; IP paranoia — resolvable with NDA click-through, screenshot redaction, kill-switch access revoke. Wizard step 8, v1.</li>
+        <li>Wizard funnel completion rate — must exceed ~50% or business fails; save/resume and AI-drafted aha moment are required from day one.</li>
+        <li>Auto-extraction hallucination — mitigated by source snippets + one-click confirm per claim.</li>
+        <li>Guidelines drift — 7-day passive re-crawl; active per-report crawl in v1.1.</li>
+        <li>Tester ranking / reputation system — needed before private programs unlock.</li>
+        <li>Cross-border payment ops — Payoneer, Wise, TDS, W-8BEN, entity structure. Legal + finance workstream.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>What has to be true before any code</h3>
+      <p>Five vibe-coded MVP founders sit down with the Guidelines Wizard. Three or more complete it end-to-end within ten minutes and produce guidelines a tester could actually test against. If that fails, the model needs a rethink — not another design cycle.</p>
+      <div class="quote">Friends are your demo cohort, not your economics. Real supply-side proof starts at week six, after loyalty burns off.</div>
+    </div>
+
+  </section>
+
+  <div class="footcredit">
+    <h2><span class="flourish">§</span>The room that pressure-tested it</h2>
+    <div class="personas">
+      <div class="persona"><span class="icon">📊</span><span><span class="who">Mary</span><span class="role">Business Analyst · Porter's rigor</span></span></div>
+      <div class="persona"><span class="icon">📋</span><span><span class="who">John</span><span class="role">Product Manager · JTBD detective</span></span></div>
+      <div class="persona"><span class="icon">🎨</span><span><span class="who">Sally</span><span class="role">UX Designer · edge-case empathy</span></span></div>
+      <div class="persona"><span class="icon">🏗️</span><span><span class="who">Winston</span><span class="role">System Architect · boring &amp; sturdy</span></span></div>
+      <div class="persona"><span class="icon">🗡️</span><span><span class="who fresh">Priya, VP Product at Maze</span><span class="role">hostile competitor</span></span></div>
+      <div class="persona"><span class="icon">⚔️</span><span><span class="who fresh">Marcus</span><span class="role">tester who quit Bugcrowd</span></span></div>
+      <div class="persona"><span class="icon">⚔️</span><span><span class="who fresh">Karen</span><span class="role">YC partner · 800 pitches deep</span></span></div>
+      <div class="persona"><span class="icon">⚔️</span><span><span class="who fresh">Ravi</span><span class="role">burned Indian QA freelancer</span></span></div>
+      <div class="persona"><span class="icon">🗡️</span><span><span class="who fresh">Anaya</span><span class="role">spec-conformance QA lead, fintech</span></span></div>
+      <div class="persona"><span class="icon">⚔️</span><span><span class="who fresh">Priya Iyer</span><span class="role">failed AI-marketplace founder</span></span></div>
+    </div>
+  </div>
+
+  <div class="signoff">Sealed at the anvil · The BMad Forge · MMXXVI</div>
+</article>
+</body>
+</html>
